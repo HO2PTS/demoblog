@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BlogController!{% endblock %}
+
+{% block body %}
+<section class="row articles">
+    <article>
+
+        <h2> Titre Article </h2>
+        <div class="metadata"> Ecrit le 26/09/2022 à 14:19 dans la catégori Politique </div>
+        <div class="content">
+            <img src="https://picsum.photos/250/150" alt="">
+            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic excepturi incidunt culpa numquam nemo beatae consequuntur omnis itaque. Doloremque, ipsam! </p>
+            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic excepturi incidunt culpa numquam nemo beatae consequuntur omnis itaque. Doloremque, ipsam! </p>
+            <a href="{{ path('blog_show') }}" class="btn btn-primary"> Lire la suite </a>
+        </div>
+    </article>
+
+     <article>
+
+        <h2> Titre Article </h2>
+        <div class="metadata"> Ecrit le 26/09/2022 à 14:19 dans la catégori Politique </div>
+        <div class="content">
+            <img src="https://picsum.photos/250/150" alt="">
+            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic excepturi incidunt culpa numquam nemo beatae consequuntur omnis itaque. Doloremque, ipsam! </p>
+            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic excepturi incidunt culpa numquam nemo beatae consequuntur omnis itaque. Doloremque, ipsam! </p>
+            <a href="#" class="btn btn-primary"> Lire la suite </a>
+        </div>
+    </article>
+
+    
+</section>
+{% endblock %}

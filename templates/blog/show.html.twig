@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BlogController!{% endblock %}
+
+{% block body %}
+
+<section class="row article">
+
+        <article class="col-md-6 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1">
+            <h2> {{ item.title }} </h2>
+            {# Syntaxe twig : symfony accède à la propriété titlee via son getter #}
+            <div class="metadata"> Ecrit le {{ item.createAt|date("d/m/Y à H:i:s") }} dans la catégorie Politique </div>
+            {# Date() est un filtre twig et permet de converti dateTime en chaîne de caratère #}
+            <div class="content">
+                <img src="{{ item.image }}" alt="">
+                {{ item.content|raw }} {# raw() est un filtre twig et permet d'interpréter les balises html #}
+            </div>
+        </article>
+
+</section>
+ 
+{% endblock %}
