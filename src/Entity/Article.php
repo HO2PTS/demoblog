@@ -17,7 +17,7 @@ class Article
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"Ce champ ne pet pas être vide")]
+    #[Assert\NotBlank(message:"Ce champ ne peut pas être vide")]
     #[Assert\Length(min:5, max:255, minMessage: "Pas assez de caractères. Il faut au moins {{ limit }} caratères.")]
     private ?string $title = null;
 
