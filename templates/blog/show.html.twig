@@ -9,7 +9,7 @@
         <article class="col-md-6 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1">
             <h2> {{ item.title }} </h2>
             {# Syntaxe twig : symfony accède à la propriété titlee via son getter #}
-            <div class="metadata"> Ecrit le {{ item.createAt|date("d/m/Y à H:i:s") }} dans la catégorie Politique </div>
+            <div class="metadata"> Ecrit le {{ item.createAt|date("d/m/Y à H:i:s") }} dans la catégorie {{item.category.title}} </div>
             {# Date() est un filtre twig et permet de converti dateTime en chaîne de caratère #}
             <div class="content">
                 <img src="{{ item.image }}" alt="">
@@ -19,4 +19,19 @@
 
 </section>
  
+ <h2 class="text-center mx-auto m-3"> Commentaires </h2>
+ <section id="commentaire" class="col-md-10 mx-auto"> 
+ {%  for comment in item.comments %}
+<hr>
+    <div class="comment"> 
+        <div class="row">
+        {{ comment.author }} <small>{{ comment.createdAt|date("d/m/Y à H:i:s") }}</small>
+        </div>
+        <div class="col-md-9">
+        {{ comment.content|raw }}
+        </div>
+    </div>
+ {% endfor %}
+ </section>
+
 {% endblock %}
