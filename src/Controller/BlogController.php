@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Comment;
 use App\Form\ArticleType;
+use Doctrine\ORM\Mapping\Id;
+use App\Form\CommentPostType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping\Id;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -38,14 +40,35 @@ class BlogController extends AbstractController
     }
     #[Route('blog/show/{id}', name: "blog_show")]
     
-    public function show($id, ArticleRepository $repo)  //$id correspond au {id} (paramètres de route) dans l'URL 
+    public function show($id, ArticleRepository $repo, Request $globals, EntityManagerInterface $manager)  //$id correspond au {id} (paramètres de route) dans l'URL 
     {
         $article = $repo->find($id);
 
+        $comment = new Comment;
+
+        $form = $this->createForm(CommentPostType::class, $comment);
+
+        $form->handleRequest($globals);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $comment->setCreatedAT(new \DateTime);
+            $comment->setArticle($article);
+            $comment->setAuthor($this->getUser()); // on récupère l'utilisateur
+            
+            $manager->persist($comment);
+            $manager->flush();
+
+            return $this->redirectToRoute('blog_show', [
+                'id' => $article->getId()
+            ]);
+            // cette méthode permet de redirier veers la page de notre article nouvellement crée 
+        } 
+
         // find() permet de récupérer un article en fonction de son id
 
-        return $this->render('blog/show.html.twig', [
-            'item' => $article
+        return $this->renderForm('blog/show.html.twig', [
+            'item' => $article,
+            'formComment' => $form
         ]);
     }
     #[Route('blog/new', name:"blog_create")]

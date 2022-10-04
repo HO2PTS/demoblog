@@ -55,7 +55,7 @@ class ArticleFixtures extends Fixture
 
                     $days = $interval->days; //on récupère l'intervalle en jours
 
-                    $comment->setAuthor($faker->name)
+                    $comment
                             ->setContent($content)
                             ->setCreatedAT($faker->dateTimeBetween('-' . $days . ' days'))
                             ->setArticle($article);

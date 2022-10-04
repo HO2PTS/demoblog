@@ -20,17 +20,35 @@
 </section>
  
  <h2 class="text-center mx-auto m-3"> Commentaires </h2>
+
+ {% if app.user %}
+ {{ form_start(formComment) }}
+
+    {{ form_widget(formComment.content, {
+        attr: {
+            placeholder: "Poster un commentaire"
+        }
+    }) }}
+
+    <button type="subit" class="btn btn-primary mt-2"> Envoyer </button>
+ 
+ {{ form_end(formComment) }}
+
+ {% else %}
+<a href=" {{ path('app_login') }} "> Cliquez ici </a> pour vous connecter et envoyer un commentaire
+ {% endif %}
  <section id="commentaire" class="col-md-10 mx-auto"> 
  {%  for comment in item.comments %}
-<hr>
+
     <div class="comment"> 
         <div class="row">
-        {{ comment.author }} <small>{{ comment.createdAt|date("d/m/Y à H:i:s") }}</small>
+        {{ comment.author.firstname }} {{ comment.author.lastname }} <br> <small> ( {{ comment.createdAt|date("d/m/Y à H:i:s") }} )</small>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-9 row">
         {{ comment.content|raw }}
         </div>
     </div>
+    <hr>
  {% endfor %}
  </section>
 
